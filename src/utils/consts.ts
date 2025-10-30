@@ -1,0 +1,1 @@
+export const GOOGLE_AUTH_URL = "https://www.googleapis.com/oauth2/v3"

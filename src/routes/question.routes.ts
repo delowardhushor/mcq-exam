@@ -5,6 +5,7 @@ import {
   getQuestions,
   updateQuestion,
   deleteQuestion,
+  bulkCreateQuestions,
 } from "../controllers/Question.controller";
 import { authMiddleware, adminOnly } from "../middlewares/authMiddleware";
 
@@ -14,8 +15,9 @@ const router = Router();
 router.get("/", getQuestions);
 
 // Admin-only
-router.post("/", authMiddleware, adminOnly, createQuestion);
-router.put("/:id", authMiddleware, adminOnly, updateQuestion);
-router.delete("/:id", authMiddleware, adminOnly, deleteQuestion);
+router.post("/", createQuestion);
+router.post("/bulk", bulkCreateQuestions);
+router.put("/:id", updateQuestion);
+router.delete("/:id", deleteQuestion);
 
 export default router;

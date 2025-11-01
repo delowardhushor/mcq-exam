@@ -40,7 +40,8 @@ export const googleLogin = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      data: { accessToken, user },
+      accessToken,
+      user,
     });
   } catch (error) {
     console.error("Google login failed:", error);

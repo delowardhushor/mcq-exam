@@ -5,8 +5,8 @@ export interface IQuestion extends Document {
   questionText: string;
   options: string[];
   correctAnswer: string;
-  categories: string[]; // e.g. ['bcs', 'general-knowledge']
-  subjects: string[];   // e.g. ['math', 'english']
+  categories: string[]; // category slugs
+  subjects: string[];   // subject slugs
   difficulty: "easy" | "medium" | "hard";
   explanation?: string;
 }
@@ -14,10 +14,10 @@ export interface IQuestion extends Document {
 const QuestionSchema = new Schema<IQuestion>(
   {
     questionText: { type: String, required: true },
-    options: { type: [String], required: true },
+    options: [{ type: String, required: true }],
     correctAnswer: { type: String, required: true },
-    categories: [{ type: String }],
-    subjects: [{ type: String }],
+    categories: [{ type: String, lowercase: true, trim: true }], // e.g., "bcs", "hsc", "math"
+    subjects: [{ type: String, lowercase: true, trim: true }],   // e.g., "english", "geometry"
     difficulty: {
       type: String,
       enum: ["easy", "medium", "hard"],
